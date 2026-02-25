@@ -1,0 +1,8 @@
+name: bch709-r
+channels:
+  - conda-forge
+dependencies:
+  - r-base
+  - r-ggplot2
+
+prefix: "/home/hanachogan/.local/share/mamba/envs/bch709-r"
