@@ -104,7 +104,7 @@ p <- ggplot(plot_df, aes(x = Gene, y = Condition, fill = Expression)) +
     panel.background = element_rect(fill = "white", color = NA),
     plot.background = element_rect(fill = "white", color = NA),
     panel.border = element_rect(color = "black", fill = NA, linewidth = 0.6),
-    axis.text.x = element_text(size = 6, angle = 45, hjust = 1, vjust = 1),
+    axis.text.x = element_text(size = 8, angle = 45, hjust = 1, vjust = 1),
     legend.background = element_rect(fill = "white", color = "black"),
     legend.key = element_rect(fill = "white", color = NA)
   )
