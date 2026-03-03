@@ -1,59 +1,47 @@
 # bch709_vibe_coding
 
-## Installation
+This README is dedicated to this repository only.
 
-From the project root:
+## Project scope
+
+Yeast genomics workflows in this repo currently include:
+
+- Chromosome-level feature counting from GFF (`scripts/chr_feature_counts.py`)
+- mRNA GC content analysis from FASTA (`scripts/mrna_gc_content.R`)
+
+## Environment
+
+Create/update environment from project root:
 
 ```bash
-cd /home/hanachogan/bch709_vibe_coding
 conda env create -f environment.yml
-```
-
-If the environment already exists:
-
-```bash
+# or
 conda env update -f environment.yml --prune
 ```
 
-Activate:
+Run commands with the environment active:
 
 ```bash
 conda activate bch709-r
 ```
 
-## Overview
+## Inputs
 
-Project workspace for yeast genome/annotation analysis and plotting.
+- `data/saccharomyces_cerevisiae.gff.gz`
+- `data/chrom.sizes`
+- `data/mrna.fa.gz`
+- `data/toy/toy.gff.gz`
+- `data/toy/chrom.sizes`
 
-## Verify packages
+## Workflows
 
-```bash
-python -c "import pandas, numpy, matplotlib, seaborn, Bio, tqdm; print('python ok')"
-R -q -e "library(ggplot2); cat('R ok\n')"
-```
-
-## Run analyses
-
-Generate the heatmap:
-
-```bash
-Rscript data/make_gasch_heatmap.R
-```
-
-Count chromosome features:
+Chromosome feature counts:
 
 ```bash
 python scripts/chr_feature_counts.py
 ```
 
-## Toy test
-
-Toy inputs are available in `data/toy/`:
-
-- `data/toy/chrom.sizes`
-- `data/toy/toy.gff.gz`
-
-Run the feature counter on toy data:
+Toy run for chromosome feature counts:
 
 ```bash
 python scripts/chr_feature_counts.py \
@@ -63,14 +51,21 @@ python scripts/chr_feature_counts.py \
   --out-dropped results/toy/dropped_seqids.txt
 ```
 
-## Inputs
+mRNA GC content analysis:
 
-- `data/saccharomyces_cerevisiae.gff.gz`
-- `data/chrom.sizes`
-- `data/gasch2000.txt`
+```bash
+conda run -n bch709-r Rscript scripts/mrna_gc_content.R
+```
 
 ## Outputs
 
-- `data/gasch2000_top10_heatmap.png`
 - `results/chr_feature_counts.tsv`
 - `results/dropped_seqids.txt`
+- `results/toy/chr_feature_counts.tsv`
+- `results/toy/dropped_seqids.txt`
+- `results/mrna_metrics.tsv`
+- `results/gc_content_distribution.png`
+
+## Notes
+
+The GC workflow computes per-accession GC fraction `(G + C) / length`, sorts records by GC descending, writes a TSV summary, and produces a histogram+density plot with mean and median markers.
