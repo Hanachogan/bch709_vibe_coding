@@ -65,3 +65,15 @@ If your local environment name is different (for example `bch709_vibe_coding_hw2
 5. Row-normalize by Z-score: `(x - row_mean) / row_sd` with safe handling for `row_sd = 0`.
 6. Cluster rows using Euclidean distance + `hclust(method = "ward.D2")`.
 7. Cut dendrogram into 4 clusters (`cutree(k=4)`), save cluster assignments, and plot annotated heatmap PDF.
+
+## Interpretation Q&A
+
+Question: "Do the top 200 most variable yeast stress-response genes cluster into distinct expression patterns, and what biological processes characterize each cluster?"
+
+Answer: "Cluster 1: Genes that show a strong induction during the heat-shock time course (higher Z-scores across many “Heat Shock” columns), consistent with an acute heat-stress activation program (e.g., protective/chaperone-like response).
+
+Cluster 2: Genes that are consistently repressed during heat shock (lower Z-scores across “Heat Shock” columns), matching a stress-driven shutdown of growth/translation-related activity.
+
+Cluster 3: Genes with a delayed or condition-specific induction (weaker early response but clearer changes in later time points/shift conditions like 37→25°C), suggesting an adaptation/recovery program rather than an immediate shock response.
+
+Cluster 4: Genes with more mixed or transient responses (smaller, patchier up/down changes across subsets of conditions), consistent with specialized stress modules that respond only under certain temperature shifts or combined treatments."
