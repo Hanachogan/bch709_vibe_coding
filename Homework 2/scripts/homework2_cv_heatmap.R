@@ -79,6 +79,8 @@ pheatmap(
   cluster_cols = FALSE,
   show_rownames = TRUE,
   show_colnames = TRUE,
+  fontsize = 8,
+  fontsize_row = 4,
   angle_col = 90,
   main = "Yeast stress response, CV top200 (Gasch et al. 2000)"
 )

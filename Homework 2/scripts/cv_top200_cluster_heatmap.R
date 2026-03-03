@@ -135,6 +135,8 @@ pheatmap(
   annotation_colors = anno_colors,
   show_rownames = TRUE,
   show_colnames = TRUE,
+  fontsize = 8,
+  fontsize_row = 4,
   main = "CV top200 yeast stress genes (row Z-score, k=4 clusters)"
 )
 dev.off()
