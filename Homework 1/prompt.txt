@@ -1,0 +1,50 @@
+PROMPT 1
+TASK: GC content analysis for UCSC yeast mRNA FASTA (Saccharomyces cerevisiae)
+
+INPUT
+- File: mrna.fa.gz
+- Format: FASTA, headers look like:
+  >BC001547 /gb=BC001547 /gi=12654078 /ug=Sc.3456 /len=1254
+  ATGTCTGCTCCAGCTAGCAGTGAAACTTTATTCAGAAACTGCTTAG...
+- Each record:
+  - One header line starting with ">"
+  - Followed by one or more sequence lines (A/C/G/T/N...)
+
+ENVIRONMENT REQUIREMENT
+- Write R code that runs in the `bch709_vibe_coding` conda environment.
+- The code should run from the project directory and create outputs under `results/`.
+
+PROCEDURE
+1) Read and parse the gzipped FASTA file (mrna.fa.gz) without manually unzipping.
+2) For each FASTA record, extract:
+   - accession: the first token after ">" (e.g., BC001547)
+   - length: sequence length (number of bases across all sequence lines)
+   - gc_content: (count(G)+count(C)) / length
+3) Create a summary table with columns:
+   - accession
+   - length
+   - gc_content (rounded to 4 decimals)
+4) Sort the table by gc_content descending.
+5) Write the table to:
+   - results/mrna_metrics.tsv   (TSV, tab-separated, no row names)
+6) Create a distribution plot of gc_content:
+   - Save to results/gc_content_distribution.png
+   - Image size: 1600 × 900 pixels, dpi = 200
+   - X-axis: GC content from 0 to 1
+   - Histogram with a density curve overlay
+   - Mean and median shown as vertical dashed lines
+   - Caption that reports: n, mean, median, sd (use 4 decimals)
+7) Ensure results/ exists (create if missing).
+
+OUTPUTS (EXPECTED)
+- results/mrna_metrics.tsv
+  - columns: accession, length, gc_content (4 decimals)
+  - sorted by gc_content desc
+- results/gc_content_distribution.png
+  - histogram + density overlay
+  - mean/median dashed vertical lines
+  - caption includes n, mean, median, sd
+  - 1600x900 px
+
+PROMPT 2
+In read me file at the end of write this Question 'what is the GC content distribution of yeast mRNA sequences, and are there distinct GC-content subpopulations?'' and answer ''Yeast mRNA GC content is concentrated around ~0.40–0.42 (mean 0.4167, median 0.4011; n=474), producing a largely unimodal distribution. The density curve shows a dominant peak near ~0.39–0.41 with a right-skewed tail toward higher GC values (~0.55–0.70). While there is a slight shoulder at higher GC, the distribution does not show clearly separated peaks, so there is no strong evidence for distinct GC-content subpopulations—rather a main group with a high-GC tail.''

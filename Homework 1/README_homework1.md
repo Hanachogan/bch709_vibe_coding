@@ -75,3 +75,9 @@ conda run -n bch709-r Rscript "Homework 1/scripts/mrna_gc_content.R"
 5. Count GC bases (`G` and `C`) on uppercase sequence text.
 6. Compute per-record GC fraction and sort descending.
 7. Write TSV and generate PNG plot with summary statistics.
+
+## Interpretation Q&A
+
+Question: "what is the GC content distribution of yeast mRNA sequences, and are there distinct GC-content subpopulations?''
+
+Answer: "Yeast mRNA GC content is concentrated around ~0.40–0.42 (mean 0.4167, median 0.4011; n=474), producing a largely unimodal distribution. The density curve shows a dominant peak near ~0.39–0.41 with a right-skewed tail toward higher GC values (~0.55–0.70). While there is a slight shoulder at higher GC, the distribution does not show clearly separated peaks, so there is no strong evidence for distinct GC-content subpopulations—rather a main group with a high-GC tail.''
