@@ -1,0 +1,81 @@
+TASK 1
+Compute top 200 yeast stress genes by coefficient of variation (CV) and create a heatmap.
+
+ENVIRONMENT
+- Write R code that runs in the `bch709_vibe_coding` conda environment.
+- Installed packages: data.table, ggplot2, pheatmap, viridisLite, scales.
+
+INPUT
+- data/gasch2000.txt (TSV, log2 expression ratios)
+- First column: UID (gene_id)
+- Skip metadata columns: NAME, description, GWEIGHT
+- Remaining columns: stress conditions (numeric)
+
+PROCEDURE
+1) Compute for each gene across all conditions:
+   - mean_expr
+   - sd_expr
+   - cv = sd_expr / abs(mean_expr)
+2) Remove genes with all NA or zero variance.
+3) Select top 200 genes by CV descending.
+4) Save table:
+   - results/yeast_stress_cv_top200.tsv
+   - Columns: gene_id, mean_expr, sd_expr, cv
+   - Round numeric columns to 4 decimals.
+5) Print top 10 genes to console.
+6) Heatmap for top 200 genes:
+   - Rows: gene_id (CV descending order), cluster_rows = FALSE
+   - Columns: all original conditions, cluster_cols = FALSE
+   - Save: results/yeast_stress_cv_top200_heatmap.png
+   - Size: 1800 x 1200 px, dpi 200
+   - Rotate x labels 90 degrees
+   - Title: "Yeast stress response, CV top200 (Gasch et al. 2000)"
+
+EXPECTED OUTPUTS
+- results/yeast_stress_cv_top200.tsv
+- results/yeast_stress_cv_top200_heatmap.png
+
+
+TASK 2
+Clustered heatmap of top 200 yeast stress genes (Gasch 2000) with row-wise Z-score and k=4 clusters.
+
+INPUT FILES
+1) results/yeast_stress_cv_top200.tsv
+   - Contains 200 genes in column `gene_id`
+2) data/gasch2000.txt
+   - Yeast stress expression data (log2 ratios)
+   - Includes metadata columns: NAME, description, GWEIGHT
+
+ANALYSIS PROCEDURE
+1) Extract top-200 gene_ids from `results/yeast_stress_cv_top200.tsv`.
+2) Read `data/gasch2000.txt`.
+3) Keep only rows matching the top-200 gene list.
+4) Remove metadata columns: NAME, description, GWEIGHT.
+5) Keep first 30 condition columns only (original order).
+6) Row-wise Z-score: z = (value - row_mean) / row_sd.
+   - Handle row_sd = 0 safely.
+7) Cluster rows:
+   - dist(..., method = "euclidean")
+   - hclust(..., method = "ward.D2")
+8) Assign clusters with cutree(k=4).
+
+HEATMAP REQUIREMENTS
+- Use pheatmap.
+- Cluster rows using the computed hclust object.
+- Do not cluster columns: cluster_cols = FALSE.
+- Add `annotation_row` showing k=4 cluster assignment.
+- Save PDF:
+  - results/cv_top200_cluster_heatmap.pdf
+  - width = 8, height = 12 (inches)
+
+ASSIGNMENT TABLE
+- Save: results/cluster_assignment.tsv
+- Columns:
+  - gene_id
+  - cluster (1-4)
+- Sort by cluster ascending, then gene_id.
+- TSV format, header included, no row names, no quotes.
+
+EXPECTED OUTPUTS
+- results/cv_top200_cluster_heatmap.pdf
+- results/cluster_assignment.tsv

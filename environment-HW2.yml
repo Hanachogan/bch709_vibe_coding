@@ -1,0 +1,10 @@
+name: bch709_vibe_coding_hw2
+channels:
+  - conda-forge
+dependencies:
+  - r-base
+  - r-data.table
+  - r-ggplot2
+  - r-pheatmap
+  - r-viridislite
+  - r-scales
