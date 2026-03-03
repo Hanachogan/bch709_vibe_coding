@@ -1,0 +1,3 @@
+chrom	chrom_length_bp	n_gene	n_exon_unique	n_tRNA	n_snoRNA	gene_per_Mb	exon_unique_per_Mb	tRNA_per_Mb	snoRNA_per_Mb
+chrA	1000	2	2	1	1	2000.0000	2000.0000	1000.0000	1000.0000
+chrB	2000	1	0	1	2	500.0000	0.0000	500.0000	1000.0000

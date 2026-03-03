@@ -1,0 +1,13 @@
+##gff-version 3
+chrA	src	gene	1	100	.	+	.	ID=g1
+chrA	src	gene	200	300	.	+	.	ID=g2
+chrA	src	exon	1	50	.	+	.	Parent=t1
+chrA	src	exon	1	50	.	+	.	Parent=t2
+chrA	src	exon	60	80	.	-	.	Parent=t3
+chrA	src	tRNA	500	550	.	+	.	ID=trna1
+chrA	src	snoRNA	700	730	.	-	.	ID=sno1
+chrB	src	gene	100	200	.	-	.	ID=g3
+chrB	src	tRNA	300	350	.	+	.	ID=trna2
+chrB	src	snoRNA	400	450	.	-	.	ID=sno2
+chrB	src	snoRNA	500	550	.	+	.	ID=sno3
+chrC	src	gene	1	100	.	+	.	ID=g_out

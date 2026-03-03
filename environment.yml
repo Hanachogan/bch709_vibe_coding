@@ -2,6 +2,13 @@ name: bch709-r
 channels:
   - conda-forge
 dependencies:
+  - python
+  - pandas
+  - numpy
+  - matplotlib
+  - seaborn
+  - biopython
+  - tqdm
   - r-base
   - r-ggplot2
 
